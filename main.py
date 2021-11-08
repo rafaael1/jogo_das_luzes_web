@@ -1,13 +1,12 @@
-# TODO
-# Validar a leitura do arquivo
-# melhorar a parte gráfica
-
 from datetime import datetime
 from dateutil import tz
+from time import sleep
 
+X = "\U0001F7E5"
+O = "\U0001F7E8"
 
-X = "\033[7;31mX\033[m"
-O = "\033[1;33mO\033[m"
+# X = "\033[7;31mX\033[m"
+# O = "\033[1;33mO\033[m"
 
 
 def instrucoes():
@@ -15,11 +14,19 @@ def instrucoes():
         "<---------------------------------- \033[1;30;43mJogo das Luzes\033[m ---------------------------------->")
     print()
     print(
-        """   O objetivo do jogo das luzes é transformar todas as peças vermelhas em amarelas, 
+        f"""   O objetivo do jogo das luzes é transformar todas as peças \033[1;31mvermelhas\033[m em \033[1;33mamarelas\033[m, 
               com o menor números de jogadas.
 
-              \033[1;31;4mX\033[m -> Luz \033[1;37;4mapagada\033[m
-              \033[1;33;4mO\033[m -> Luz \033[1;33;4macesa\033[m
+            \t\t{X} -> Luz \033[1;37;4mapagada\033[m
+            \t\t{O} -> Luz \033[1;33;4macesa\033[m
+
+        O jogo consiste de um tabuleiro 5x5 onde cada bloco representará um estado de aceso ou apagado.
+    Inicialmente, o tabuleiro contará com todos os blocos apagados, ou seja, na cor vermelha ({X} ). No inicio do 
+    jogo, o jogador informará quantas jogadas deseja realizar para atingir o objetivo do jogo, transformar todos 
+    os blocos vermelhos ({X} ) em amarelo ({O} ).
+
+            \033[1mRegras\033[m
+
         """
     )
 
@@ -30,8 +37,7 @@ def instrucoes():
         champion = champion[0].rstrip().rsplit(',')
 
         print("   " + "-"*80)
-        print(
-            f"          \U0001F3C6 \U0001F3C6 \U0001F3C6   \033[1;37;41m  Champion --->  {champion[0]} - {champion[1]} tentativas   \033[m \U0001F3C6 \U0001F3C6 \U0001F3C6")
+        print(   f"          \U0001F3C6 \U0001F3C6 \U0001F3C6   \033[1;37;41m  Champion --->  {champion[0]} - {champion[1]} tentativas   \033[m \U0001F3C6 \U0001F3C6 \U0001F3C6")
 
     print("   " + "-"*80)
 
@@ -47,22 +53,22 @@ def openFile():
 def printRanking():
     linhas = openFile()
 
-    print(
-        "\t\t########   \U0001F947  \033[1;32;45mRanking de jogadores\033[m  \U0001F947   ########", end="\n\n")
-    for ind, linha in enumerate(linhas):
-        print(
-            f"\t\t\t\t{ind+1}. {linha.capitalize().split(',')[0]} -> {linha.split(',')[1]} ")
+    print("\t\t########   \U0001F947  \033[1;32;45mRanking de jogadores\033[m  \U0001F947   ########", end="\n\n")
 
-    print(
-        '\n', '\x1b[?12l\x1b[?25l\t\t ***  PRESSIONE ENTER PARA RETORNAR AO MENU  ***')
+    if linhas:
+        for ind, linha in enumerate(linhas):
+            print(
+                f"\t\t\t\t{ind+1}. {linha.capitalize().split(',')[0]} -> {linha.split(',')[1]} ")
+        
+    else :
+        print("\t\t\t\t NENHUM VENCEDOR !!! ", end='')
 
-    while(True):
-        i = input()
-        if not i:
-            break
-        print("\x1b[2M\x1b[1F\x1b[?12l\x1b[?25l", end="")
-
-    print("\x1b[?12h\x1b[?25h")
+    print(end='\n\n\x1b[?12l\x1b[?25l')
+    for restante in range(13, 0, -1):
+        print('\t\t***  AGUARDE - RETORNO AO MENU EM {:2d} SEGUNDOS  ***'.format(restante), end='\r')
+        sleep(1)
+    
+    print(end="\n\x1b[?12h\x1b[?25h")
 
 
 def clearScreen():
@@ -71,19 +77,20 @@ def clearScreen():
 
 def menuGame():
     # 2. Menu perguntando se o jogador quer jogar ou sair ou ver o ranking
-    print("\n\t\t\U0000250C\t********   Deseja Jogar?   ********\t\U00002510\n")
+    print("\n\t\t\U0000250C\t********   Deseja Jogar ?   ********\t\U00002510\n")
     print("\t\t|\t        \033[1;35m[ 1 ] - Jogar   \033[m\U0001F3B2    \t\t|")
     print(
         "\t\t|\t        \033[1;32m[ 2 ] - Ranking \033[m\U0001F3C5     \t\t|")
     print(
         "\t\t|\t        \033[1;37m[ 0 ] - Sair    \033[m\U0001F91D     \t\t|\n")
+    print("\t\t\U00002514\t " + "********"*4 + "\t\U00002518")
 
     escolha = input("\n\t\t\t     \U0001F449  Sua Escolha: ")
     escolha = int(escolha) if escolha.isdigit() else -1
 
     # 3. Número de jogadas o jogador quer para tentar ganhar o jogo
     if escolha == 1:
-        jogadas = int(input("Qual o número de jogadas que você quer? "))
+        jogadas = int(input("\n\t\t -> Qual o número de jogadas que você quer ? "))
         return jogadas
     elif escolha == 2:
         clearScreen()
@@ -93,7 +100,7 @@ def menuGame():
     elif escolha == 0:
         return 0
     else:
-        print("\nEntre com um valor válido!")
+        print("\n\t\t Entre com um valor válido!")
         return -1
 
 
@@ -104,10 +111,10 @@ def validacao():
 
 def validaEntrada():
     while True:  # Loop para verificar se está correto os valores inseridos
-        linhaEscolhida = input("Qual linha deseja escolher? ")
+        linhaEscolhida = input("\t\t -> Qual linha deseja escolher? ")
         linhaEscolhida = int(
             linhaEscolhida) if linhaEscolhida.isdigit() else -3
-        colunaEscolhida = input("Qual coluna deseja escolher? ")
+        colunaEscolhida = input("\t\t -> Qual coluna deseja escolher? ")
         colunaEscolhida = int(
             colunaEscolhida) if colunaEscolhida.isdigit() else -3
 
@@ -119,7 +126,7 @@ def validaEntrada():
         ):
             return linhaEscolhida, colunaEscolhida
         else:
-            print("\nValores incorretos! Insira novamente os valores\n")
+            print("\n\t\tValores incorretos! Insira novamente os valores\n")
 
 
 def verificaBorda(linha, coluna) -> list:
@@ -186,32 +193,35 @@ def aplicaJogada(vetorJogadas):
 
 # desenha o tabuleiro
 def desenhaTabuleiro(colunas=5):
-    print("\n   _|  ", end="")
+    # print("\n   _|  ", end="")
+    print("\n\t\t\t    |  ", end="")
     for i in range(1, colunas + 1):
-        print(f"\033[1;35m{i}\033[m" + "  ", end="")
+        print(f" \033[1;35m{i}\033[m" + "  ", end="")
+    
+    print(" |\n\t\t\t   \U00002043|\U00002043", "\U00002043"*19, end="")
 
-    print("|")
+    print("  |")
     for i, j in enumerate(jogo):
-        print(f" \033[1;35m{i+1}\033[m", " |" + "  " + "  ".join(j) + "  |")
+        print(f"\t\t\t \033[1;35m{i+1}\033[m", " |" + "  " + "  ".join(j) + "   |")
     print()
 
 
 instrucoes()
 
 while True:
-    # jogo = [[X, X, X, X, X],
-    #         [X, X, X, X, X],
-    #         [X, X, X, X, X],
-    #         [X, X, X, X, X],
-    #         [X, X, X, X, X]]
+    jogo = [[X, X, X, X, X],
+            [X, X, X, X, X],
+            [X, X, X, X, X],
+            [X, X, X, X, X],
+            [X, X, X, X, X]]
 
-    jogo = [
-        [O, X, O, O, O],
-        [X, X, X, O, O],
-        [O, X, O, X, O],
-        [O, O, X, X, X],
-        [O, O, O, X, O],
-    ]
+    # jogo = [
+    #     [O, X, O, O, O],
+    #     [X, X, X, O, O],
+    #     [O, X, O, X, O],
+    #     [O, O, X, X, X],
+    #     [O, O, O, X, O],
+    # ]
 
     jogadas = jogadasRestantes = menuGame()
 
@@ -228,20 +238,21 @@ while True:
                 aplicaJogada(xpto)
 
                 jogadasRestantes -= 1
-                print(f"Número de jogadas restantes : {jogadasRestantes}")
+                print(f"\t\t -- Número de jogadas restantes : {jogadasRestantes}")
 
             else:
                 # Fim do jogo
-                print("Acabou o seu número de jogadas! Ainda não foi dessa vez.")
-                print("\033[1m -- Fim de Game! -- \033[m")
+                print("\n\t\tAcabou o seu número de jogadas! Ainda não foi dessa vez.")
+                print("\t\t\t\t\033[1m -- Fim de Game! -- \033[m")
+                sleep(5)
+                clearScreen()
                 break
 
         if not validacao():
 
             desenhaTabuleiro()
 
-            dateRanking = datetime.now(tz=tz.gettz(
-                'America/Bahia')).strftime('%B %d, %Y %H:%M')
+            dateRanking = datetime.now(tz=tz.gettz('America/Bahia')).strftime('%B %d, %Y %H:%M')
 
             print(dateRanking)
 
@@ -254,23 +265,16 @@ while True:
             # Abre o arquivo txt e coloca o nome e o número de tentativas em um vetor
             linhas = openFile()
 
-            mem = [[int(j.split(",")[1].rstrip()), j.split(",")[0]]
-                   for j in linhas] if len(linhas) > 0 else []
-            # with open('ranking_jogo.txt', mode='r', encoding='utf-8') as f:
-            #     for jogadores in enumerate(f):
-            #         mem.append([
-            #             int(jogadores.split(' ')[2]),
-            #             jogadores.split(' ')[0]
-            #         ])
+            mem = [[int(j.split(",")[1].rstrip()), j.split(",")[0]] for j in linhas] if len(linhas) > 0 else []
 
             mem.append([jogadas - jogadasRestantes, nome, dateRanking])
             mem = sorted(mem)
             print(mem)
 
             with open('ranking_jogo.txt', mode='w+', encoding='utf-8') as f:
-                for i in mem:
+                for i in mem[:9]:
                     f.write(f'{i[1]},{i[0]},{i[2]}\n')
 
     elif jogadas == 0:
-        print("\n\t\t########   Saindo do jogo . . . \U0001F44B \U0001F44B \U0001F44B")
+        print("\n\t\t   \U0001F44B \U0001F44B \U0001F44B   Saindo do jogo . . . \U0001F44B \U0001F44B \U0001F44B")
         break
