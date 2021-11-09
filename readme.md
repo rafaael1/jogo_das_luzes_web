@@ -15,3 +15,15 @@ A imagem abaixo ilustra as instruções e a dinâmica do jogo.
 ![Instrução_jogo_das_luzes](JOGO_DAS_LUZES-1.png)
 
 Bom divertimento!
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Authors
+
+- [@rafaael1](https://github.com/rafaael1)
+
+## Contributing
+
+Contributions are always welcome!
