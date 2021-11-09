@@ -222,14 +222,6 @@ while True:
             [X, X, X, X, X],
             [X, X, X, X, X]]
 
-    # jogo = [
-    #     [O, X, O, O, O],
-    #     [X, X, X, O, O],
-    #     [O, X, O, X, O],
-    #     [O, O, X, X, X],
-    #     [O, O, O, X, O],
-    # ]
-
     jogadas = jogadasRestantes = menuGame()
 
     if jogadas > 0:
