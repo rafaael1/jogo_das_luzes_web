@@ -5,9 +5,6 @@ from time import sleep
 X = "\U0001F7E5"
 O = "\U0001F7E8"
 
-# X = "\033[7;31mX\033[m"
-# O = "\033[1;33mO\033[m"
-
 
 def instrucoes():
     print(
@@ -20,12 +17,18 @@ def instrucoes():
             \t\t{X} -> Luz \033[1;37;4mapagada\033[m
             \t\t{O} -> Luz \033[1;33;4macesa\033[m
 
-        O jogo consiste de um tabuleiro 5x5 onde cada bloco representará um estado de aceso ou apagado.
-    Inicialmente, o tabuleiro contará com todos os blocos apagados, ou seja, na cor vermelha ({X} ). No inicio do 
-    jogo, o jogador informará quantas jogadas deseja realizar para atingir o objetivo do jogo, transformar todos 
-    os blocos vermelhos ({X} ) em amarelo ({O} ).
+    O jogo consiste de um tabuleiro 5x5 onde cada bloco representará um estado de aceso 
+    ou apagado. Inicialmente, o tabuleiro contará com todos os blocos apagados, ou seja, 
+    na cor vermelha ({X} ). No início do jogo, o jogador informará quantas jogadas deseja 
+    realizar para atingir o objetivo do jogo, transformar todos os blocos vermelhos ({X} ) 
+    em amarelo ({O} ).
 
-            \033[1mRegras\033[m
+            \033[1mInstruções\033[m
+
+    Qualquer peça pode ser selecionada. Depois de selecionada as peças adjacentes em 
+    cima, em baixo da esquerda e da direita são comutadas, ou seja, o estado é alterado 
+    para aceso se estava apagado e vice-versa. O jogo termina se todas as peças foram 
+    'ligadas' ou se as jogadas foram esgotadas.
 
         """
     )
@@ -90,8 +93,12 @@ def menuGame():
 
     # 3. Número de jogadas o jogador quer para tentar ganhar o jogo
     if escolha == 1:
-        jogadas = int(input("\n\t\t -> Qual o número de jogadas que você quer ? "))
-        return jogadas
+        jogadas = input("\n\t\t -> Qual o número de jogadas que você quer ? ")
+        while not jogadas.isdigit():
+            print("\x1b[2A\x1b[2M")
+            jogadas = input("\r\t\t -> Qual o \033[7;34mnúmero \033[m de jogadas que você quer ? ")
+
+        return int(jogadas)
     elif escolha == 2:
         clearScreen()
         printRanking()
