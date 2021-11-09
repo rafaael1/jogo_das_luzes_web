@@ -3,7 +3,7 @@
 O objetivo do Jogo das Luzes é transformar todas as peças <span style="color:red">vermelhas</span>
  em <span style="color:yellow">amarelas</span>, com o menor números de jogadas.
 
-      🟥	-> Luz apagada
+      🟥 -> Luz apagada
       🟨 -> Luz acesa
 
 ## Instruções do Jogo
