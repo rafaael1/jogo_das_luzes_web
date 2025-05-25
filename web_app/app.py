@@ -54,24 +54,24 @@ def handle_click(row, col):
 def submit_score():
     data = request.get_json()
     if not data or 'name' not in data or 'moves' not in data:
-        return jsonify({'success': False, 'message': 'Missing name or moves'}), 400
+        return jsonify({'success': False, 'message': 'Nome ou jogadas ausentes.'}), 400
     
     player_name = data['name']
     moves_count = data['moves']
     
     # Basic validation for moves_count
     if not isinstance(moves_count, int) or moves_count <= 0:
-        return jsonify({'success': False, 'message': 'Invalid moves count'}), 400
+        return jsonify({'success': False, 'message': 'Contagem de jogadas inválida.'}), 400
 
     current_date_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     try:
         add_score(player_name, moves_count, current_date_str)
-        return jsonify({'success': True, 'message': 'Score submitted successfully!'})
+        return jsonify({'success': True, 'message': 'Pontuação enviada com sucesso!'})
     except Exception as e:
         # Log the exception e for debugging
         print(f"Error submitting score: {e}")
-        return jsonify({'success': False, 'message': 'Failed to submit score due to server error.'}), 500
+        return jsonify({'success': False, 'message': 'Falha ao enviar pontuação devido a erro no servidor.'}), 500
 
 @app.route('/api/reset')
 def reset_game():

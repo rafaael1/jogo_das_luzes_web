@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.win) {
                 // Board remains non-interactive until after prompt and score submission/cancellation
                 setTimeout(async () => { // Make this async to await fetch
-                    const playerName = window.prompt(`Congratulations! You won in ${data.moves} moves!\nEnter your name for the leaderboard:`);
+                    const playerName = window.prompt(`Parabéns! Você venceu em ${data.moves} jogadas!\nDigite seu nome para o ranking:`);
                     if (playerName && playerName.trim() !== "") {
                         // No explicit button to disable for prompt, browser handles modal nature
                         try {
@@ -110,19 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                             const submitResult = await submitResponse.json();
                             if (submitResponse.ok && submitResult.success) {
-                                alert(submitResult.message + "\nYou will now be redirected to the ranking page.");
+                                alert(submitResult.message + "\nVocê será redirecionado para a página de ranking.");
                                 window.location.href = '/ranking'; // Redirect to ranking page
                             } else {
-                                alert("Failed to submit score: " + (submitResult.message || "Unknown error"));
+                                alert("Falha ao enviar pontuação: " + (submitResult.message || "Erro desconhecido"));
                                 setBoardInteractive(true); // Re-enable board if score submission fails and user stays on page
                             }
                         } catch (submitError) {
                             console.error("Error submitting score:", submitError);
-                            alert("An error occurred while submitting your score.");
+                            alert("Ocorreu um erro ao enviar sua pontuação.");
                             setBoardInteractive(true); // Re-enable board
                         }
                     } else {
-                        alert("You won, but your score was not saved because no name was provided.");
+                        alert("Você venceu, mas sua pontuação não foi salva porque nenhum nome foi fornecido.");
                         setBoardInteractive(true); // Re-enable board as game is over but score not saved
                     }
                 }, 100); // Small delay to allow UI update before prompt
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error("Error during cell click:", error);
-            alert("An error occurred during your move. Please try again."); // User-friendly message
+            alert("Ocorreu um erro durante sua jogada. Por favor, tente novamente."); // User-friendly message
             setBoardInteractive(true); // Re-enable board on error
         }
     }
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderBoard(); // This will redraw the board, implicitly making it interactive again
         } catch (error) {
             console.error("Error resetting game:", error);
-            alert("Failed to reset game. Please try again.");
+            alert("Falha ao reiniciar o jogo. Por favor, tente novamente.");
         } finally {
             resetButton.disabled = false; // Re-enable reset button
             setBoardInteractive(true); // Ensure board is interactive
