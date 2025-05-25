@@ -1,13 +1,13 @@
 # Jogo das Luzes - Web Version
 
-O objetivo do Jogo das Luzes é transformar todas as luzes do tabuleiro para o estado ACESO (amarelo), com o menor número de jogadas possível. Esta é uma versão web do clássico jogo.
+O objetivo do Jogo das Luzes é ACENDER todas as luzes do tabuleiro com o menor número de jogadas possíveis. Esta é uma versão web do clássico jogo (lights out).
 
-- **Luz APAGADA:** <span style="color:red; font-weight:bold;">VERMELHO</span>
-- **Luz ACESA:** <span style="color:yellow; font-weight:bold;">AMARELO</span> (com fundo escuro para visualização) ou <span style="background-color:yellow; color:black; font-weight:bold;">AMARELO</span>
+- **Luz APAGADA:** ${\normalsize{\textbf{\color{red}VERMELHO}}}$
+- **Luz ACESA:** ${\normalsize{\textbf{\color{yellow}AMARELO}}}$ (com fundo escuro para visualização)
 
 ## Como Jogar
 
-O jogo é disputado em um tabuleiro de 5x5 luzes. Inicialmente, todas as luzes começam apagadas (vermelhas).
+O jogo é disputado em um tabuleiro de 5 x 5 luzes. Inicialmente, todas as luzes começam apagadas (vermelhas).
 
 1.  **Selecionar uma Luz:** Clique em qualquer luz no tabuleiro.
 2.  **Efeito do Clique:** Clicar em uma luz alterna o estado dela (de acesa para apagada, ou de apagada para acesa) E também alterna o estado das luzes adjacentes diretas (Norte, Sul, Leste e Oeste).
@@ -63,8 +63,9 @@ Ao vencer o jogo (deixar todas as luzes acesas), você será solicitado a inseri
 
 ## Authors
 
-- [@rafaael1](https://github.com/rafaael1) (Criador da versão original em console)
-- Adaptado para versão web como parte de um projeto.
+- [@rafaael1](https://github.com/rafaael1) (versão original em console - [Jogo das Luzes](https://github.com/rafaael1/jogo_das_luzes) )
+
+Adaptado para versão web como parte de um projeto.
 
 ## Contributing
 
