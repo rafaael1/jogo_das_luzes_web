@@ -1,0 +1,191 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #eef1f5; /* Light grayish blue */
+    color: #333;
+    display: flex; /* For centering page-container */
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 800px; /* Max width for content */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within container */
+}
+
+h1 {
+    color: #2c3e50; /* Darker blue-gray */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Game Page Specific Styles */
+.game-info {
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #34495e; /* Another shade of blue-gray */
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 320px; /* Slightly larger for better touch */
+    height: 320px;
+    border: 3px solid #34495e; /* Border matching h1 color */
+    background-color: #bdc3c7; /* Light gray background for the board */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 5px; /* Small padding around cells */
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #95a5a6; /* Slightly darker gray for cell borders */
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px; /* Rounded corners for cells */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+}
+
+.cell:active {
+    transform: scale(0.95); /* Click effect */
+}
+
+.light-off {
+    background-color: #e74c3c; /* Softer Red */
+    /* Consider adding a subtle icon or gradient if possible with CSS only */
+}
+
+.light-on {
+    background-color: #f1c40f; /* Softer Yellow (Amber) */
+}
+
+.game-controls {
+    display: flex;
+    gap: 15px; /* Increased space between buttons */
+    margin-top: 25px;
+    align-items: center;
+}
+
+/* Common button style (for reset and links styled as buttons) */
+.button-base {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.button-base:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+#reset-button {
+    background-color: #3498db; /* Brighter Blue */
+}
+
+#reset-button:hover {
+    background-color: #2980b9; /* Darker shade of blue */
+}
+
+.button-link {
+    background-color: #2ecc71; /* Emerald Green */
+}
+
+.button-link:hover {
+    background-color: #27ae60; /* Darker shade of green */
+}
+
+/* Ranking Page Specific Styles */
+.ranking-table {
+    width: 90%;
+    max-width: 700px; /* Ensure table is not too wide on large screens */
+    margin: 30px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* For rounded corners on table */
+}
+
+.ranking-table th, .ranking-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1; /* Lighter gray for row separators */
+}
+
+.ranking-table th {
+    background-color: #34495e; /* Dark blue-gray for header */
+    color: white;
+    font-weight: 600;
+}
+
+.ranking-table tr:nth-child(even) {
+    background-color: #f8f9f9; /* Very light gray for even rows */
+}
+
+.ranking-table tr:hover {
+    background-color: #e8ecf1; /* Light hover effect for rows */
+}
+
+.no-rankings-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #7f8c8d; /* Grayish text */
+    margin-top: 50px;
+}
+
+.navigation-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.navigation-link a {
+    /* Using .button-base styles by adding the class to the <a> tag if desired, or define separately */
+    display: inline-block; /* To allow padding etc. */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #95a5a6; /* Gray for back button */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navigation-link a:hover {
+    background-color: #7f8c8d; /* Darker gray */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Styling for disabled elements */
+.cell.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+button:disabled, .button-base:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: #bdc3c7; /* Muted color when disabled */
+}

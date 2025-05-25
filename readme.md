@@ -1,21 +1,61 @@
-# Jogo das Luzes
+# Jogo das Luzes - Web Version
 
-O objetivo do Jogo das Luzes é transformar todas as peças <span style="color:red">vermelhas</span>
- em <span style="color:yellow">amarelas</span>, com o menor números de jogadas.
+O objetivo do Jogo das Luzes é transformar todas as luzes do tabuleiro para o estado ACESO (amarelo), com o menor número de jogadas possível. Esta é uma versão web do clássico jogo.
 
-      🟥 -> Luz apagada
-      🟨 -> Luz acesa
+- **Luz APAGADA:** <span style="color:red; font-weight:bold;">VERMELHO</span>
+- **Luz ACESA:** <span style="color:yellow; font-weight:bold;">AMARELO</span> (com fundo escuro para visualização) ou <span style="background-color:yellow; color:black; font-weight:bold;">AMARELO</span>
 
-## Instruções do Jogo
+## Como Jogar
 
-Qualquer peça pode ser selecionada. Depois de selecionada as peças adjacentes em cima, em baixo da esquerda e da direita são comutadas, ou seja, o estado é alterado para aceso se estava apagado e vice-versa.
-O jogo termina se todas as peças foram 'ligadas' ou se as jogadas foram esgotadas.
+O jogo é disputado em um tabuleiro de 5x5 luzes. Inicialmente, todas as luzes começam apagadas (vermelhas).
 
-A imagem abaixo ilustra as instruções e a dinâmica do jogo.
+1.  **Selecionar uma Luz:** Clique em qualquer luz no tabuleiro.
+2.  **Efeito do Clique:** Clicar em uma luz alterna o estado dela (de acesa para apagada, ou de apagada para acesa) E também alterna o estado das luzes adjacentes diretas (Norte, Sul, Leste e Oeste).
+3.  **Objetivo:** Deixar todas as luzes do tabuleiro acesas (amarelas).
+4.  **Contador de Jogadas:** O número de jogadas é contado. Tente vencer com o mínimo de cliques!
 
-![Instrução_jogo_das_luzes](JOGO_DAS_LUZES-1.png)
+## Interface do Jogo
 
-Bom divertimento!
+O jogo agora é jogado inteiramente no seu navegador web e possui duas telas principais:
+
+*   **Página do Jogo (`/`):**
+    *   Mostra o tabuleiro 5x5 interativo.
+    *   Exibe o contador de jogadas atual.
+    *   Contém um botão "Reset Game" para reiniciar o tabuleiro para o estado inicial.
+    *   Inclui um link "View Rankings" para acessar a página de pontuações.
+
+*   **Página de Rankings (`/ranking`):**
+    *   Mostra uma tabela com as melhores pontuações (top 10).
+    *   Cada entrada no ranking exibe o nome do jogador, o número de jogadas e a data em que a pontuação foi alcançada.
+    *   Permite voltar para a página do jogo.
+
+## Executando a Aplicação Localmente
+
+Para rodar o Jogo das Luzes no seu computador:
+
+1.  **Pré-requisitos:**
+    *   Python 3.x instalado.
+    *   Flask instalado. Se não tiver, instale com o comando:
+        ```bash
+        pip install Flask
+        ```
+
+2.  **Navegue até o diretório raiz do projeto** (o diretório que contém a pasta `web_app` e este `readme.md`).
+
+3.  **Execute o servidor Flask:**
+    Abra um terminal ou prompt de comando no diretório raiz e execute:
+    ```bash
+    python -m web_app.app
+    ```
+    Este comando inicia o servidor de desenvolvimento do Flask.
+
+4.  **Acesse o Jogo:**
+    Abra seu navegador web e vá para o seguinte endereço:
+    [http://localhost:8080](http://localhost:8080) ou [http://0.0.0.0:8080](http://0.0.0.0:8080)
+
+## Sistema de Ranking
+
+Ao vencer o jogo (deixar todas as luzes acesas), você será solicitado a inserir seu nome. Sua pontuação (nome e número de jogadas) será salva e exibida na página de rankings se estiver entre as melhores.
 
 ## License
 
@@ -23,8 +63,9 @@ Bom divertimento!
 
 ## Authors
 
-- [@rafaael1](https://github.com/rafaael1)
+- [@rafaael1](https://github.com/rafaael1) (Criador da versão original em console)
+- Adaptado para versão web como parte de um projeto.
 
 ## Contributing
 
-Contributions are always welcome!
+Contributions are always welcome! Se tiver sugestões ou melhorias, sinta-se à vontade para contribuir.

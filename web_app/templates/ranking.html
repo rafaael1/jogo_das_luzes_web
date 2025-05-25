@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Rankings - Jogo das Luzes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>🏆 Game Rankings 🏆</h1>
+
+        {% if rankings and rankings|length > 0 %}
+            <table class="ranking-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Player Name</th>
+                    <th>Moves Count</th>
+                    <th>Date Achieved</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in rankings %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entry.name }}</td>
+                    <td>{{ entry.moves }}</td>
+                    <td>{{ entry.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-rankings-message">No rankings available yet. Be the first to win!</p>
+    {% endif %}
+
+    <div class="navigation-link">
+        <a href="{{ url_for('game_page') }}">Back to Game</a>
+    </div>
+    </div>
+</body>
+</html>
