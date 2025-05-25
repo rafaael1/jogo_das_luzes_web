@@ -2,8 +2,8 @@
 
 O objetivo do Jogo das Luzes é ACENDER todas as luzes do tabuleiro com o menor número de jogadas possíveis. Esta é uma versão web do clássico jogo (lights out).
 
-- **Luz APAGADA:** ${\normalsize{\textbf{\color{red}VERMELHO}}}$
-- **Luz ACESA:** ${\normalsize{\textbf{\color{yellow}AMARELO}}}$ (com fundo escuro para visualização)
+      🟥 -> Luz apagada
+      🟨 -> Luz acesa
 
 ## Como Jogar
 
