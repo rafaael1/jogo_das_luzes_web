@@ -1,12 +1,9 @@
 import os
 from datetime import datetime
 
-# Assuming ranking_jogo.txt is in the /app directory (root of the project)
-# If app.py is in /app/web_app/, then the path from ranking_utils.py would be ../ranking_jogo.txt
-# For now, let's try to keep it simple and assume it's in the same directory as where the app is run from,
-# or use an absolute path if needed.
-# Given the execution context, it's safer to assume it's at the root of the checkout.
-RANKING_FILE_PATH = "/app/ranking_jogo.txt" # Use absolute path in the sandbox
+# Constants
+# Path to the ranking file. In a real-world scenario, this should be an absolute path.
+RANKING_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "ranking_jogo.txt"))
 MAX_RANKING_ENTRIES = 10 # Store top 10 scores
 
 def get_rankings():
@@ -104,7 +101,7 @@ if __name__ == '__main__':
     # Test add_score
     print("Adding scores...")
     add_score("PlayerA", 15)
-    add_score("PlayerB", 10)
+    add_score("PlayerB", 10, "2025-05-25 17:34:12")
     add_score("PlayerC", 20)
     add_score("PlayerD", 12, "2023-01-01 10:00:00") # Specific date
 

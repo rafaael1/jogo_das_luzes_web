@@ -2,6 +2,12 @@ LIGHT_OFF = "\U0001F7E5"  # Red square
 LIGHT_ON = "\U0001F7E8"   # Yellow square
 
 class Game:
+    """
+    Class representing the game board and its logic.    
+    The board is a 2D grid of lights that can be toggled on and off.
+    The game is won when all lights are ON.
+    """
+
     def __init__(self, rows=5, cols=5):
         self.rows = rows
         self.cols = cols

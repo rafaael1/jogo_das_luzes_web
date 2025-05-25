@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
-from .game_logic import Game, LIGHT_ON, LIGHT_OFF # Import Game and constants
-from .ranking_utils import get_rankings, add_score # Import ranking utilities
+from game_logic import Game, LIGHT_ON, LIGHT_OFF # Import Game and constants
+from ranking_utils import get_rankings, add_score # Import ranking utilities
 from datetime import datetime # Import datetime
 
 app = Flask(__name__)
@@ -37,11 +37,9 @@ def handle_click(row, col):
     win_status = game.check_win()
     
     if win_status:
-        # For FR5, we are not yet saving the score with name here.
-        # That will be handled in FR6.
+        # If the game is won, we can save the score.
         # We can log that a win occurred.
         # print(f"Win condition met in {server_moves_count} moves. Score not saved yet.")
-        # The actual add_score(name, server_moves_count) will be called from a new route in FR6.
         pass # No longer need to print, client will prompt for name.
 
     return jsonify({
